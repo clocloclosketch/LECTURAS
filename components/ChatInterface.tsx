@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { getStudyAssistance } from '../services/geminiService';
-import { ReadingData } from '../types';
+import { getStudyAssistance } from '../services/geminiService.ts';
+import { ReadingData } from '../types.ts';
 
 interface Props {
   reading: ReadingData;

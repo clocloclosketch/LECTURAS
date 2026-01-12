@@ -1,7 +1,7 @@
 
 import React from 'react';
-import { ReadingId } from '../types';
-import { READINGS } from '../constants';
+import { ReadingId } from '../types.ts';
+import { READINGS } from '../constants.ts';
 
 interface Props {
   onSelect: (id: ReadingId) => void;

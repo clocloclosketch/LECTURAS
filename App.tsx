@@ -1,11 +1,11 @@
 
 import React, { useState } from 'react';
-import { ReadingId, ReadingData } from './types';
-import { READINGS } from './constants';
-import { ReadingSelector } from './components/ReadingSelector';
-import { Flashcards } from './components/Flashcards';
-import { Quiz } from './components/Quiz';
-import { ChatInterface } from './components/ChatInterface';
+import { ReadingId } from './types.ts';
+import { READINGS } from './constants.ts';
+import { ReadingSelector } from './components/ReadingSelector.tsx';
+import { Flashcards } from './components/Flashcards.tsx';
+import { Quiz } from './components/Quiz.tsx';
+import { ChatInterface } from './components/ChatInterface.tsx';
 
 type Tab = 'summary' | 'flashcards' | 'quiz' | 'tutor';
 
@@ -46,10 +46,9 @@ const App: React.FC = () => {
             <h1 className="text-xl font-black text-gray-900 leading-tight">{selectedReading.title}</h1>
             <p className="text-xs text-indigo-500 font-bold uppercase tracking-widest">{selectedReading.author}</p>
           </div>
-          <div className="w-16"></div> {/* Spacer for balance */}
+          <div className="w-16"></div>
         </div>
         
-        {/* Sub-nav */}
         <div className="max-w-4xl mx-auto px-4 overflow-x-auto">
           <div className="flex space-x-8 border-t border-gray-50">
             {(['summary', 'flashcards', 'quiz', 'tutor'] as Tab[]).map((tab) => (
@@ -69,11 +68,9 @@ const App: React.FC = () => {
         </div>
       </header>
 
-      {/* Content Area */}
       <main className="flex-1 max-w-4xl mx-auto w-full p-4 pb-20">
         {activeTab === 'summary' && (
           <div className="space-y-10 animate-fade-in">
-            {/* Quick Cards */}
             <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
                 <h3 className="text-indigo-600 font-black text-xs uppercase tracking-[0.2em] mb-4">La Idea Clave</h3>
@@ -89,7 +86,6 @@ const App: React.FC = () => {
               </div>
             </section>
 
-            {/* Characters */}
             <section>
               <h3 className="text-gray-900 font-black text-lg mb-6 flex items-center">
                 <span className="w-8 h-8 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center mr-3">
@@ -110,7 +106,6 @@ const App: React.FC = () => {
               </div>
             </section>
 
-            {/* Themes */}
             <section>
               <h3 className="text-gray-900 font-black text-lg mb-6 flex items-center">
                 <span className="w-8 h-8 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center mr-3">

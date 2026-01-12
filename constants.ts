@@ -1,5 +1,5 @@
 
-import { ReadingId, ReadingData } from './types';
+import { ReadingId, ReadingData } from './types.ts';
 
 export const READINGS: Record<ReadingId, ReadingData> = {
   [ReadingId.FUENTEOVEJUNA]: {
