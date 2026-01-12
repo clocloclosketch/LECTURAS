@@ -12,6 +12,7 @@ type Tab = 'summary' | 'flashcards' | 'quiz' | 'tutor';
 const App: React.FC = () => {
   const [selectedReadingId, setSelectedReadingId] = useState<ReadingId | null>(null);
   const [activeTab, setActiveTab] = useState<Tab>('summary');
+  const [showCopyTooltip, setShowCopyTooltip] = useState(false);
 
   const selectedReading = selectedReadingId ? READINGS[selectedReadingId] : null;
 
@@ -20,9 +21,27 @@ const App: React.FC = () => {
     setActiveTab('summary');
   };
 
+  const handleShare = () => {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url);
+    setShowCopyTooltip(true);
+    setTimeout(() => setShowCopyTooltip(false), 2000);
+  };
+
   if (!selectedReading) {
     return (
-      <div className="min-h-screen pb-20">
+      <div className="min-h-screen pb-20 relative">
+        <div className="absolute top-4 right-4 z-50">
+          <button 
+            onClick={handleShare}
+            className="flex items-center space-x-2 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-100 text-xs font-bold text-indigo-600 hover:shadow-md transition-all active:scale-95"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+            </svg>
+            <span>{showCopyTooltip ? '¡Copiado!' : 'Copiar URL'}</span>
+          </button>
+        </div>
         <ReadingSelector onSelect={setSelectedReadingId} />
       </div>
     );
@@ -46,7 +65,20 @@ const App: React.FC = () => {
             <h1 className="text-xl font-black text-gray-900 leading-tight">{selectedReading.title}</h1>
             <p className="text-xs text-indigo-500 font-bold uppercase tracking-widest">{selectedReading.author}</p>
           </div>
-          <div className="w-16"></div>
+          <button 
+            onClick={handleShare}
+            className="text-gray-400 hover:text-indigo-600 p-2 relative"
+            title="Copiar enlace"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+            </svg>
+            {showCopyTooltip && (
+              <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-[10px] px-2 py-1 rounded whitespace-nowrap">
+                Enlace copiado
+              </span>
+            )}
+          </button>
         </div>
         
         <div className="max-w-4xl mx-auto px-4 overflow-x-auto">
